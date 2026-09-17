@@ -1,0 +1,35 @@
+body {
+  background: #fdf6f0;
+}
+h1{
+    color: #ab6161;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+button{
+    background-color: #f3c4ca;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #5c4b4b;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    cursor: pointer;    
+}
+button:hover{
+    background-color: #9b5454;
+    color: #3d3535;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.controls,
+.mode-switch {
+  display: flex;
+  gap: 8px;
+}
