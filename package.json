@@ -9,7 +9,7 @@
     "dist": "electron-builder"
   },
   "build": {
-    "appId": "com.Rimz.pomodoroapp",
+    "appId": "com.rimz.pomodoroapp",
     "productName": "Pomodoro App",
     "win": {
       "target": "nsis",
@@ -17,7 +17,6 @@
     }
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
