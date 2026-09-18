@@ -1,18 +1,27 @@
+const { ipcRenderer } = require('electron');
+document.getElementById('minimizeBtn').addEventListener('click',()=>{
+    ipcRenderer.send('minimize-window');
+});
+document.getElementById('closeBtn').addEventListener('click',()=>{
+    ipcRenderer.send('close-window');
+});
 const startBtn = document.getElementById('startBtn');
 const pauseBtn = document.getElementById('pauseBtn');
 const resetBtn = document.getElementById('resetBtn');
 const modeLabel = document.getElementById('modeLabel');
 const timerDisplay = document.getElementById('timerDisplay');
 const sessionCount = document.getElementById('sessionCount');
+const ringProgress = document.getElementById('ringProgress');
+const FULL_DASH = 628;
 /*const DURATIONS = {
-    'focus': 25*60,
-    'short': 5*60,
-    'long': 10*60
-}*/
-const DURATIONS = {
     'focus': 5,
     'short': 3,
     'long': 4
+}*/
+const DURATIONS = {
+    'focus': 25*60,
+    'short': 5*60,
+    'long': 10*60
 }
 let currentMode = 'focus';
 let secondsLeft = DURATIONS[currentMode];
@@ -33,16 +42,10 @@ function setTimerInterval(){
         if(secondsLeft > 0){
             secondsLeft --;
             updateTimeDisplay();
+            updateRing();
         } else{            
             clearTimerInterval();
-            handleTimerComplete();
-           /* if(currentMode === 'focus'){
-                sessionCompleted++;
-                updateSessionCount();
-                setMode('short');
-            } else if (currentMode === 'short'){
-                setMode('focus');
-            }*/
+            handleTimerComplete();         
         }
      },1000);
 }
@@ -72,7 +75,14 @@ function setMode(modeVar){
     secondsLeft = DURATIONS[modeVar];
     modeLabel.textContent = modeVar === 'focus'? 'Focus' : modeVar === 'short' ? 'Short Break' : 'Long Break';
     updateTimeDisplay();
+    updateRing();
        
+}
+function updateRing(){
+    const totalDuration = DURATIONS[currentMode];
+    const fractionElapsed = (totalDuration - secondsLeft)/totalDuration;
+    const offset = FULL_DASH * fractionElapsed;
+    ringProgress.style.strokeDashoffset = offset;
 }
 startBtn.addEventListener('click',()=>{
     setTimerInterval();
@@ -86,6 +96,7 @@ resetBtn.addEventListener('click',()=>{
     clearTimerInterval();
     secondsLeft = DURATIONS[currentMode];
     updateTimeDisplay();
+    updateRing();
 })
 
 const shortBrkBtn = document.getElementById('shortBreakBtn');

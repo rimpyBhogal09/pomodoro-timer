@@ -4,12 +4,30 @@
     <meta charset="UTF-8">
     <title>Pomodoro</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="title-bar">
+        <span class="title-bar-text">🍅 Pomodoro</span>
+        <div class="title-bar-controls">
+            <button id="minimizeBtn">—</button>
+            <button id="closeBtn">×</button>
+        </div>
+    </div>
     <div class="app">
-        <h1 id="modeLabel">Focus</h1>
-        <div id="timerDisplay">25:00</div>
-
+        <div class="mode-header">
+            <span>🍅</span>
+            <h1 id="modeLabel">Focus</h1>
+        </div>  
+        <div class="timer-ring-container">
+            <svg width="220" height="220">
+                <circle class="ring-bg" cx="110" cy="110" r="100"></circle>
+                <circle class="ring-progress" id="ringProgress" cx="110" cy="110" r="100"></circle>
+            </svg>
+            <div id="timerDisplay" class="timer-text">25:00</div>
+        </div>             
         <div class="controls">
             <button id="startBtn">Start</button>
             <button id="pauseBtn">Pause</button>
@@ -21,7 +39,7 @@
             <button id="shortBreakBtn">Short Break</button>
             <button id="longBreakBtn">Long Break</button>
         </div>
-        <p>Sessions today: <span id="sessionCount">0</span></p>
+        <p id="sessions">🌸 Sessions today: <span id="sessionCount">0</span></p>
     </div>  
     <script src="renderer.js"></script>
 </body>
